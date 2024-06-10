@@ -499,7 +499,6 @@ inspecting signatures in Mach-O binaries.")
         moreutils
         ;; Compression and archiving
         tar
-        bzip2
         gzip
         xz
         ;; Build tools
@@ -533,8 +532,9 @@ inspecting signatures in Mach-O binaries.")
           ((string-contains target "darwin")
            (list ;; Native GCC 11 toolchain
                  gcc-toolchain-11
-                 binutils
                  clang-toolchain-17
+                 lld-17
+                 (make-lld-wrapper lld-17 #:lld-as-ld? #t)
                  python-signapple
                  zip))
           (else '())))))
